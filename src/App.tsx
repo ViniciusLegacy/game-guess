@@ -1,3 +1,4 @@
+import { Letters } from "./components/Letters"
 import { Header } from "./components/Header"
 import { Tip } from "./components/Tip"
 
@@ -13,7 +14,14 @@ export default function App() {
     <div className={styles.container}>
       <main>
         <Header current={5} max={10} onRestart={handleRestartGame} />
+        
         <Tip tip="Linguagem de programação dinâmica" />
+
+        <Letters value="R" />
+        <Letters value="R" />
+        <Letters value="R" />
+        <Letters value="R" />
+        <Letters value="R" />
       </main>
     </div>
   ) 
