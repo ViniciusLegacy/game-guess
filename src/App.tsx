@@ -17,11 +17,13 @@ export default function App() {
         
         <Tip tip="Linguagem de programação dinâmica" />
 
-        <Letters value="R" />
-        <Letters value="R" />
-        <Letters value="R" />
-        <Letters value="R" />
-        <Letters value="R" />
+        <div className={styles.word}>
+          <Letters value="R" />
+          <Letters value="R" />
+          <Letters value="R" />
+          <Letters value="R" />
+          <Letters value="R" />
+        </div>
       </main>
     </div>
   ) 
