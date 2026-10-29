@@ -12,11 +12,13 @@ import { Tip } from "./components/Tip"
 import styles from "./app.module.css"
 
 export default function App() {
-  const [attempts, setAttempts] = useState(0)
+  const [score, setScore] = useState(0)
   const [letter, setLetter] = useState("")
   const [lettersUsed, setLettersUsed] = useState<LettersUsedProps[]>([])
   const [challenge, setChallenge] = useState<Challenge | null>(null)
-  
+
+  const ATTEMPTS_MARGIN = 5
+
   function handleRestartGame(){
     alert("Reiniciar o jogo")
   }
@@ -26,8 +28,9 @@ export default function App() {
     const randomWord = WORDS[index]
     
     setChallenge(randomWord)
-    setAttempts(0)
+    setScore(0)
     setLetter("")
+    setLettersUsed([])
   }
 
   function handleConfirm(){
@@ -46,8 +49,12 @@ export default function App() {
       return alert(`Você já tentou a letra ${value}`)
     }
 
-    setLettersUsed((prevState) => [...prevState, { value, correct: false }])
+    const hits = challenge.word.toUpperCase().split("").filter((char) => char === value).length
+    const correct = hits > 0
+    const currentScore = score + hits
 
+    setLettersUsed((prevState) => [...prevState, { value, correct }])
+    setScore(currentScore)
     setLetter("")
   }
 
@@ -62,15 +69,17 @@ export default function App() {
   return (
     <div className={styles.container}>
       <main>
-        <Header current={attempts} max={10} onRestart={handleRestartGame} />
+        <Header current={lettersUsed.length} max={challenge.word.length + ATTEMPTS_MARGIN} onRestart={handleRestartGame} />
         
-        <Tip tip="Linguagem de programação dinâmica" />
+        <Tip tip={challenge.tip} />
 
         <div className={styles.word}>
           {
-            challenge.word.split("").map(() => (
-              <Letters value="" />
-            ))
+            challenge.word.split("").map((letter, index) => {
+              const letterUsed = lettersUsed.find((used) => used.value.toUpperCase() === letter.toUpperCase())
+
+              return <Letters key={index} value={letterUsed?.value} color={letterUsed?.correct ? "correct" : "default"}/>
+            })
           }
         </div>
 
