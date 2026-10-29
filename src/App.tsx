@@ -2,7 +2,7 @@ import { WORDS, type Challenge } from "./utils/words"
 
 import { useEffect, useState } from "react"
 
-import { LettersUsed } from "./components/LettersUsed"
+import { LettersUsed, type LettersUsedProps } from "./components/LettersUsed"
 import { Letters } from "./components/Letters"
 import { Button } from "./components/Button"
 import { Header } from "./components/Header"
@@ -14,6 +14,7 @@ import styles from "./app.module.css"
 export default function App() {
   const [attempts, setAttempts] = useState(0)
   const [letter, setLetter] = useState("")
+  const [lettersUsed, setLettersUsed] = useState<LettersUsedProps[]>([])
   const [challenge, setChallenge] = useState<Challenge | null>(null)
   
   function handleRestartGame(){
@@ -59,7 +60,7 @@ export default function App() {
           <Button title="Confirmar" />
         </div>
 
-        <LettersUsed />
+        <LettersUsed data={lettersUsed} />
       </main>
     </div>
   ) 
