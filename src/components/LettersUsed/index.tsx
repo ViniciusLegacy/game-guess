@@ -4,7 +4,7 @@ import { Letters } from "../Letters"
 
 export type LettersUsedProps = {
     value: string
-    correct: string
+    correct: boolean
 }
 
 type Props = {
