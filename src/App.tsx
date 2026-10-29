@@ -1,3 +1,4 @@
+import { LettersUsed } from "./components/LettersUsed"
 import { Letters } from "./components/Letters"
 import { Button } from "./components/Button"
 import { Header } from "./components/Header"
@@ -33,6 +34,8 @@ export default function App() {
           <Input autoFocus maxLength={1} placeholder="?" />
           <Button title="Confirmar" />
         </div>
+
+        <LettersUsed />
       </main>
     </div>
   ) 
